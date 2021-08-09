@@ -1,0 +1,12 @@
+.navigation {
+  grid-area: b;
+  background-color: green;
+}
+
+.item {
+  color: white;
+}
+
+.first_item {
+  font-size: 1.5rem;
+}

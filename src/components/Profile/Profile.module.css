@@ -1,0 +1,11 @@
+.content {
+  grid-area: c;
+}
+
+.item {
+  background-color: indigo;
+}
+.head_img {
+  width: 100%;
+  height: 80px;
+}
