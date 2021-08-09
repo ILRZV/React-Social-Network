@@ -12,8 +12,8 @@ function MyPosts() {
       </div>
       <div>
         <div>my posts</div>
-        <Post message="How are you&" />
-        <Post message="The next post" />
+        <Post message="How are you&" likeCounter={20} />
+        <Post message="The next post" likeCounter={45} S />
       </div>
     </div>
   );

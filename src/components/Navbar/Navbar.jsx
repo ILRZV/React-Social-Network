@@ -5,13 +5,13 @@ function Navbar() {
   return (
     <nav className={classes.navigation}>
       <div className={`${classes.item} ${classes.first_item}`}>
-        <a>Profile</a>
+        <a href="/profile">Profile</a>
       </div>
       <div className={classes.item}>
-        <a>Massages</a>
+        <a href="/dialogs">Massages</a>
       </div>
       <div className={classes.item}>
-        <a>News</a>
+        <a href="/news">News</a>
       </div>
       <div className={classes.item}>
         <a>Music</a>
