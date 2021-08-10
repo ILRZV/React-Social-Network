@@ -1,11 +1,12 @@
 import React from "react";
 import classes from "./Post.module.css";
+import avatar from "../../../../images/Girl.jpg";
 
 function Post(props) {
   return (
     <div className={classes.item}>
-      <img src="https://icdn.lenta.ru/images/2016/02/09/16/20160209165528498/pic_deaa7637bb70fb032b4e87f636b5aea2.jpg" />
-      {props.message}
+      <img src={avatar} />
+      <p>{props.message}</p>
       <p>Like {props.likeCounter}</p>
     </div>
   );

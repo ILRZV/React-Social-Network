@@ -1,20 +1,31 @@
 import React from "react";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import CreateIcon from "@material-ui/icons/Create";
+import Button from "@material-ui/core/Button";
 
-function MyPosts() {
+function MyPosts(props) {
+  let postsElements = props.postsData.postsData.map((element) => (
+    <Post message={element.message} likeCounter={element.likeCounter} />
+  ));
+
   return (
-    <div>
+    <div className={classes.container}>
       <div>
-        <textarea></textarea>
-        <button>Add post</button>
-        <button>Remove</button>
+        <div className={classes.create_post_info}>
+          <CreateIcon color="primary" className={classes.create_post} />
+          <span>Create post</span>
+        </div>
+        <textarea
+          placeholder="what's new?"
+          className={classes.text_area}
+        ></textarea>
+        <div className={classes.post_buttons}>
+          <Button color="primary">Add post</Button>
+          <Button color="primary">Clear</Button>
+        </div>
       </div>
-      <div>
-        <div>my posts</div>
-        <Post message="How are you&" likeCounter={20} />
-        <Post message="The next post" likeCounter={45} S />
-      </div>
+      <div>{postsElements}</div>
     </div>
   );
 }
