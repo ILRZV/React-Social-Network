@@ -1,3 +1,7 @@
+import simon from "../images/Simon.jpg";
+import peter from "../images/Peter.jpg";
+import mary from "../images/Mary.jpg";
+
 let state = {
   dialogsData: {
     dialogData: [
@@ -25,6 +29,11 @@ let state = {
       { id: 4, message: "Where am i", likeCounter: 10 },
       { id: 5, message: "I think that i'm in capture", likeCounter: 20 },
       { id: 6, message: "What", likeCounter: 202 },
+    ],
+    friendsData: [
+      { id: 1, name: "Simon", src: { simon } },
+      { id: 2, name: "Peter", src: { peter } },
+      { id: 3, name: "Mary", src: { mary } },
     ],
   },
 };
