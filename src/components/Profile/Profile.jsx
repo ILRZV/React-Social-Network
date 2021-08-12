@@ -9,8 +9,12 @@ function Profile(props) {
     <div className={classes.profile_wrapper}>
       <ProfileHeader />
       <div className={classes.profile_content}>
-        <ProfileNavigation />
-        <MyPosts postsData={props.state} />
+        <ProfileNavigation friendsData={props.state.friendsData} />
+        <MyPosts
+          postsData={props.state}
+          addPost={props.addPost}
+          inputChange={props.inputChange}
+        />
       </div>
     </div>
   );

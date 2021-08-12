@@ -8,7 +8,14 @@ function MyPosts(props) {
   let postsElements = props.postsData.postsData.map((element) => (
     <Post message={element.message} likeCounter={element.likeCounter} />
   ));
-
+  let newElementRef = React.createRef();
+  let handleChangeInput = () => {
+    props.inputChange(newElementRef.current.value);
+    newElementRef.current.value = props.postsData.input;
+  };
+  let handleAddPost = () => {
+    props.addPost(newElementRef.current.value);
+  };
   return (
     <div className={classes.container}>
       <div>
@@ -17,11 +24,16 @@ function MyPosts(props) {
           <span>Create post</span>
         </div>
         <textarea
+          value={props.postsData.input}
+          ref={newElementRef}
           placeholder="what's new?"
           className={classes.text_area}
+          onChange={handleChangeInput}
         ></textarea>
         <div className={classes.post_buttons}>
-          <Button color="primary">Add post</Button>
+          <Button color="primary" onClick={handleAddPost}>
+            Add post
+          </Button>
           <Button color="primary">Clear</Button>
         </div>
       </div>

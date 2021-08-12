@@ -1,6 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import state from "./redux/state";
+import store from "./redux/state";
 
-ReactDOM.render(<App state={state} />, document.getElementById("root"));
+let rerenderErniteTree = (store) => {
+  ReactDOM.render(
+    <App
+      state={store.getState}
+      addPost={store.addPost}
+      inputChange={store.inputChange}
+    />,
+    document.getElementById("root")
+  );
+};
+
+rerenderErniteTree(store);
+store.subscribe(rerenderErniteTree);

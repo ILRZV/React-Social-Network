@@ -15,7 +15,13 @@ function App(props) {
         <div className="app-wrapper-content">
           <Route
             path="/profile"
-            render={() => <Profile state={props.state.profileData} />}
+            render={() => (
+              <Profile
+                state={props.state.profileData}
+                addPost={props.addPost}
+                inputChange={props.inputChange}
+              />
+            )}
           />
           <Route
             path="/dialogs"
