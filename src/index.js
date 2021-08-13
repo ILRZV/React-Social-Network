@@ -1,15 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import store from "./redux/state";
+import store from "./redux/store";
 
 let rerenderErniteTree = (store) => {
   ReactDOM.render(
-    <App
-      state={store.getState}
-      addPost={store.addPost}
-      inputChange={store.inputChange}
-    />,
+    <App state={store.getState()} dispatch={store.dispatch.bind(store)} />,
     document.getElementById("root")
   );
 };

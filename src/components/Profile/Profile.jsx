@@ -10,11 +10,7 @@ function Profile(props) {
       <ProfileHeader />
       <div className={classes.profile_content}>
         <ProfileNavigation friendsData={props.state.friendsData} />
-        <MyPosts
-          postsData={props.state}
-          addPost={props.addPost}
-          inputChange={props.inputChange}
-        />
+        <MyPosts postsData={props.state} dispatch={props.dispatch} />
       </div>
     </div>
   );

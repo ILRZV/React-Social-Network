@@ -3,19 +3,26 @@ import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import CreateIcon from "@material-ui/icons/Create";
 import Button from "@material-ui/core/Button";
+import {
+  addPostRequest,
+  inputPostRequest,
+} from "../../../redux/profileReducer";
 
 function MyPosts(props) {
   let postsElements = props.postsData.postsData.map((element) => (
     <Post message={element.message} likeCounter={element.likeCounter} />
   ));
   let newElementRef = React.createRef();
+
   let handleChangeInput = () => {
-    props.inputChange(newElementRef.current.value);
+    props.dispatch(inputPostRequest(newElementRef.current.value));
     newElementRef.current.value = props.postsData.input;
   };
+
   let handleAddPost = () => {
-    props.addPost(newElementRef.current.value);
+    props.dispatch(addPostRequest());
   };
+
   return (
     <div className={classes.container}>
       <div>

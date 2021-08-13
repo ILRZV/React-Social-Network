@@ -1,6 +1,9 @@
 import simon from "../images/Simon.jpg";
 import peter from "../images/Peter.jpg";
 import mary from "../images/Mary.jpg";
+import profileReducer from "./profileReducer";
+import dialogsReduser from "./dialogsReduser";
+
 let store = {
   _state: {
     dialogsData: {
@@ -12,6 +15,7 @@ let store = {
         { id: 5, name: "Jane" },
         { id: 6, name: "Solomon" },
       ],
+      input: "",
       messagesData: [
         { id: 1, message: "Hello wordl" },
         { id: 2, message: "World is fire" },
@@ -38,28 +42,18 @@ let store = {
       ],
     },
   },
-  get getState() {
+  getState() {
     return this._state;
   },
-  inputChange(newInput) {
-    console.log(this);
-    this.state.profileData.input = newInput;
-    this.rerenderEntireTree(store);
-  },
-  addPost() {
-    debugger;
-    let post = {
-      id: 5,
-      message: this.state.profileData.input,
-      likeCounter: 0,
-    };
-    this.state.profileData.postsData.push(post);
-    this.state.profileData.input = "";
-    this.rerenderEntireTree();
-  },
   rerenderEntireTree: () => {},
+
   subscribe(observer) {
     this.rerenderEntireTree = observer;
+  },
+  dispatch(action) {
+    this._state.profileData = profileReducer(action, this._state.profileData);
+    this._state.dialogsData = dialogsReduser(action, this._state.dialogsData);
+    this.rerenderEntireTree(store);
   },
 };
 

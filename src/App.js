@@ -18,14 +18,18 @@ function App(props) {
             render={() => (
               <Profile
                 state={props.state.profileData}
-                addPost={props.addPost}
-                inputChange={props.inputChange}
+                dispatch={props.dispatch}
               />
             )}
           />
           <Route
             path="/dialogs"
-            render={() => <Dialogs state={props.state.dialogsData} />}
+            render={() => (
+              <Dialogs
+                state={props.state.dialogsData}
+                dispatch={props.dispatch}
+              />
+            )}
           />
           {/* <Route path="/news" component={Profile} />
             <Route path="/music" component={Profile} />

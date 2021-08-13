@@ -10,9 +10,9 @@ import Divider from "@material-ui/core/Divider";
 function ProfileHeader() {
   return (
     <div className={classes.container}>
-      <img class={classes.head_img} src={introImage}></img>
+      <img className={classes.head_img} src={introImage}></img>
       <div className={classes.header_info}>
-        <img class={classes.avatar} src={avatar}></img>
+        <img className={classes.avatar} src={avatar}></img>
         <div className={classes.info}>
           <span className={classes.name}>Martial Anna</span>
           <br />
