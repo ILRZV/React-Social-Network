@@ -1,5 +1,5 @@
 import React from "react";
-import MyPosts from "./MyPosts/MyPosts";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import classes from "./Profile.module.css";
 import ProfileHeader from "./ProfileHeader/ProfileHeader";
 import ProfileNavigation from "./ProfileNavigation/ProfileNavigation";
@@ -9,8 +9,8 @@ function Profile(props) {
     <div className={classes.profile_wrapper}>
       <ProfileHeader />
       <div className={classes.profile_content}>
-        <ProfileNavigation friendsData={props.state.friendsData} />
-        <MyPosts postsData={props.state} dispatch={props.dispatch} />
+        <ProfileNavigation />
+        <MyPostsContainer />
       </div>
     </div>
   );

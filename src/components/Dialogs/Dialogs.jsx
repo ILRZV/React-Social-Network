@@ -5,22 +5,22 @@ import Message from "./Message/Message";
 import {
   addMessageRequest,
   inputMessageRequest,
-} from "../../redux/dialogsReduser";
+} from "../../redux/dialogsReducer";
 
 const Dialogs = (props) => {
-  let dialogsElements = props.state.dialogData.map((element) => (
+  let dialogsElements = props.dialogsData.dialogData.map((element) => (
     <Dialog id={element.id} name={element.name} />
   ));
-  let messagesElements = props.state.messagesData.map((element) => (
+  let messagesElements = props.dialogsData.messagesData.map((element) => (
     <Message id={element.id} message={element.message} />
   ));
   let textAreaMessageRef = React.createRef();
 
   let handleMessageChange = () => {
-    props.dispatch(inputMessageRequest(textAreaMessageRef.current.value));
+    props.inputMessage(textAreaMessageRef.current.value);
   };
   let handleMessageSend = () => {
-    props.dispatch(addMessageRequest());
+    props.addMessage();
     textAreaMessageRef.current.value = "";
   };
   return (
@@ -30,7 +30,7 @@ const Dialogs = (props) => {
         {messagesElements}
         <div>
           <textarea
-            value={props.state.input}
+            value={props.dialogsData.input}
             onChange={handleMessageChange}
             ref={textAreaMessageRef}
             placeholder="Enter your message"

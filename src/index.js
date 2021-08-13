@@ -1,14 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
-import store from "./redux/store";
+import store from "./redux/redux-store";
+import { Provider } from "react-redux";
 
-let rerenderErniteTree = (store) => {
+let rerenderEntireTree = (store) => {
   ReactDOM.render(
-    <App state={store.getState()} dispatch={store.dispatch.bind(store)} />,
+    <Provider store={store}>
+      <App />
+    </Provider>,
     document.getElementById("root")
   );
 };
-
-rerenderErniteTree(store);
-store.subscribe(rerenderErniteTree);
+rerenderEntireTree(store);
+store.subscribe(() => {
+  rerenderEntireTree(store);
+});
