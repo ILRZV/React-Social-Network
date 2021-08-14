@@ -5,7 +5,7 @@ import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
-
+import UsersContainer from "./components/Users/UsersContainer";
 function App(props) {
   return (
     <BrowserRouter>
@@ -15,6 +15,7 @@ function App(props) {
         <div className="app-wrapper-content">
           <Route path="/profile" render={() => <Profile />} />
           <Route path="/dialogs" render={() => <DialogsContainer />} />
+          <Route path="/users" render={() => <UsersContainer />} />
           {/* <Route path="/news" component={Profile} />
             <Route path="/music" component={Profile} />
             <Route path="/settings" component={Profile} /> */}

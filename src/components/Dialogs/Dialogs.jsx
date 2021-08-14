@@ -9,10 +9,10 @@ import {
 
 const Dialogs = (props) => {
   let dialogsElements = props.dialogsData.dialogData.map((element) => (
-    <Dialog id={element.id} name={element.name} />
+    <Dialog id={element.id} key={element.id} name={element.name} />
   ));
   let messagesElements = props.dialogsData.messagesData.map((element) => (
-    <Message id={element.id} message={element.message} />
+    <Message id={element.id} key={element.id} message={element.message} />
   ));
   let textAreaMessageRef = React.createRef();
 

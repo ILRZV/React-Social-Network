@@ -14,21 +14,22 @@ let initialState = {
 };
 
 export default function dialogsReducer(state = initialState, action = {}) {
+  console.log(state);
   switch (action.type) {
     case addPostRequestText:
-      let post = {
-        id: 5,
-        message: state.input,
-        likeCounter: 0,
+      return {
+        ...state,
+        postsData: [
+          ...state.postsData,
+          { id: 5, message: state.input, likeCounter: 0 },
+        ],
+        input: "",
       };
-      console.log("add");
-      state.postsData.push(post);
-      state.input = "";
-      return state;
     case inputPostRequestText:
-      console.log("input");
-      state.input = action.newInput;
-      return state;
+      return {
+        ...state,
+        input: action.newInput,
+      };
     default:
       return state;
   }

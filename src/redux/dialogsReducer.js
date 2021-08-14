@@ -24,16 +24,16 @@ let initialState = {
 export default function dialogsReducer(state = initialState, action = {}) {
   switch (action.type) {
     case addMessageRequestText:
-      let message = {
-        id: 5,
-        message: state.input,
+      return {
+        ...state,
+        input: "",
+        messagesData: [...state.messagesData, { id: 5, message: state.input }],
       };
-      state.messagesData.push(message);
-      state.input = "";
-      return state;
     case inputMessageRequestText:
-      state.input = action.newInput;
-      return state;
+      return {
+        ...state,
+        input: action.newInput,
+      };
     default:
       return state;
   }

@@ -6,7 +6,11 @@ import Button from "@material-ui/core/Button";
 
 function MyPosts(props) {
   let postsElements = props.postsData.map((element) => (
-    <Post message={element.message} likeCounter={element.likeCounter} />
+    <Post
+      message={element.message}
+      key={element.id}
+      likeCounter={element.likeCounter}
+    />
   ));
   let newElementRef = React.createRef();
 
