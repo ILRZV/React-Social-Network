@@ -3,29 +3,7 @@ const unFollowUserRequestText = "UNFOLLOW_USER";
 const newUsersRequestText = "SET_USERS";
 
 let initialState = {
-  usersData: [
-    {
-      id: 1,
-      followed: false,
-      fullName: "Jane Mayers",
-      status: "Go to London",
-      location: { city: "Paris", country: "France" },
-    },
-    {
-      id: 2,
-      followed: true,
-      fullName: "Dmitriy Cosinec",
-      status: "Somebody must kill Trump",
-      location: { city: "Semenovka", country: "Belarus" },
-    },
-    {
-      id: 3,
-      followed: false,
-      fullName: "Albert Polloc",
-      status: "Hate status",
-      location: { city: "Rome", country: "Italy" },
-    },
-  ],
+  usersData: [],
 };
 
 export default function usersReducer(state = initialState, action = {}) {

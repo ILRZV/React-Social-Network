@@ -6,7 +6,8 @@ import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import UsersContainer from "./components/Users/UsersContainer";
-function App(props) {
+
+function App() {
   return (
     <BrowserRouter>
       <div className="app-wrapper">

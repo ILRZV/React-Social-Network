@@ -1,8 +1,8 @@
-import React from "react";
 import MyPosts from "./MyPosts";
 import {
   addPostRequest,
   inputPostRequest,
+  likePostRequest,
 } from "../../../redux/profileReducer";
 import { connect } from "react-redux";
 // function MyPostsContainer() {
@@ -31,6 +31,7 @@ import { connect } from "react-redux";
 let mapStateToProps = (state) => {
   return {
     postsData: state.profileData.postsData,
+    author: state.profileData.author,
   };
 };
 
@@ -41,6 +42,9 @@ let mapDispatchToProps = (dispatch) => {
     },
     changeInput: (text) => {
       dispatch(inputPostRequest(text));
+    },
+    likePost: (id) => {
+      dispatch(likePostRequest(id));
     },
   };
 };
