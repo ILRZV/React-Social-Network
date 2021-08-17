@@ -17,6 +17,11 @@ function InputZone(props) {
     newElementRef.current.value = "";
   };
 
+  let handleClear = () => {
+    props.changeInput("");
+    newElementRef.current.value = "";
+  };
+
   return (
     <div className={classes.container}>
       <div className={classes.create_post_info}>
@@ -34,7 +39,9 @@ function InputZone(props) {
         <Button color="primary" onClick={handleAddPost}>
           Add post
         </Button>
-        <Button color="primary">Clear</Button>
+        <Button color="primary" onClick={handleClear}>
+          Clear
+        </Button>
       </div>
     </div>
   );

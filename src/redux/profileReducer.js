@@ -56,7 +56,6 @@ let initialState = {
 export default function dialogsReducer(state = initialState, action = {}) {
   switch (action.type) {
     case addPostRequestText:
-      console.log(action);
       return {
         ...state,
         postsData: [
@@ -100,6 +99,7 @@ export default function dialogsReducer(state = initialState, action = {}) {
       return state;
   }
 }
+
 export const addPostRequest = (date) => {
   console.log(date);
   return {

@@ -4,11 +4,16 @@ import {
   followUserRequest,
   unFollowUserRequest,
   newUsersRequest,
+  changePageRequest,
 } from "../../redux/usersReducer";
 
 let mapStateToProps = (state) => {
+  console.log(state);
   return {
     users: state.usersData,
+    pageSize: state.usersData.pageSize,
+    totalUsersCount: state.usersData.totalUsersCount,
+    currentPage: state.usersData.currentPage,
   };
 };
 let mapDispatchToProps = (dispatch) => {
@@ -21,6 +26,9 @@ let mapDispatchToProps = (dispatch) => {
     },
     setUsers: (users) => {
       dispatch(newUsersRequest(users));
+    },
+    changePage: (page) => {
+      dispatch(changePageRequest(page));
     },
   };
 };

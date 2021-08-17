@@ -1,9 +1,13 @@
 const followUserRequestText = "FOLLOW_USER";
 const unFollowUserRequestText = "UNFOLLOW_USER";
 const newUsersRequestText = "SET_USERS";
+const changePageRequestText = "CHANGE_PAGE";
 
 let initialState = {
   usersData: [],
+  pageSize: 5,
+  totalUsersCount: 20,
+  currentPage: 1,
 };
 
 export default function usersReducer(state = initialState, action = {}) {
@@ -39,6 +43,11 @@ export default function usersReducer(state = initialState, action = {}) {
         ...state,
         usersData: [...state.usersData, ...action.users],
       };
+    case changePageRequestText:
+      return {
+        ...state,
+        currentPage: action.page,
+      };
     default:
       return state;
   }
@@ -54,4 +63,8 @@ export const unFollowUserRequest = (id) => ({
 export const newUsersRequest = (users) => ({
   type: newUsersRequestText,
   users,
+});
+export const changePageRequest = (page) => ({
+  type: changePageRequestText,
+  page,
 });

@@ -6,3 +6,8 @@
 .dialogs_items {
   padding: 10px;
 }
+
+.message {
+  background-color: white;
+  border-radius: 20px;
+}
