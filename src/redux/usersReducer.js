@@ -2,11 +2,12 @@ const followUserRequestText = "FOLLOW_USER";
 const unFollowUserRequestText = "UNFOLLOW_USER";
 const newUsersRequestText = "SET_USERS";
 const changePageRequestText = "CHANGE_PAGE";
+const setUsersCountRequestText = "SET_COUNT";
 
 let initialState = {
   usersData: [],
   pageSize: 5,
-  totalUsersCount: 20,
+  totalUsersCount: 0,
   currentPage: 1,
 };
 
@@ -41,12 +42,17 @@ export default function usersReducer(state = initialState, action = {}) {
     case newUsersRequestText:
       return {
         ...state,
-        usersData: [...state.usersData, ...action.users],
+        usersData: [...action.users],
       };
     case changePageRequestText:
       return {
         ...state,
         currentPage: action.page,
+      };
+    case setUsersCountRequestText:
+      return {
+        ...state,
+        totalUsersCount: action.count,
       };
     default:
       return state;
@@ -67,4 +73,9 @@ export const newUsersRequest = (users) => ({
 export const changePageRequest = (page) => ({
   type: changePageRequestText,
   page,
+});
+
+export const setUsersCountRequest = (count) => ({
+  type: setUsersCountRequestText,
+  count,
 });

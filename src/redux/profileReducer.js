@@ -56,12 +56,13 @@ let initialState = {
 export default function dialogsReducer(state = initialState, action = {}) {
   switch (action.type) {
     case addPostRequestText:
+      console.log(state.postsData);
       return {
         ...state,
         postsData: [
           ...state.postsData,
           {
-            id: 5,
+            id: +state.postsData[state.postsData.length - 1].id + 1,
             date: {
               day: action.date.getDate(),
               month: action.date.getMonth(),
@@ -82,6 +83,7 @@ export default function dialogsReducer(state = initialState, action = {}) {
       };
     case likePostRequestText:
       return {
+        ...state,
         postsData: state.postsData.map((element) => {
           if (element.id === action.id) {
             let likes = element.likeCounter;
@@ -101,7 +103,6 @@ export default function dialogsReducer(state = initialState, action = {}) {
 }
 
 export const addPostRequest = (date) => {
-  console.log(date);
   return {
     type: addPostRequestText,
     date: date,

@@ -12,7 +12,6 @@ function InputZone(props) {
 
   let handleAddPost = () => {
     let date = new Date();
-    console.log(date);
     props.addPost(date);
     newElementRef.current.value = "";
   };

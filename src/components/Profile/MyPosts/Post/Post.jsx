@@ -4,6 +4,7 @@ import avatar from "../../../../images/Girl.jpg";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import ShareIcon from "@material-ui/icons/Share";
+import { useEffect } from "react";
 
 function Post(props) {
   let date = new Date(
