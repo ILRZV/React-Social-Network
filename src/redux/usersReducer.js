@@ -3,12 +3,16 @@ const unFollowUserRequestText = "UNFOLLOW_USER";
 const newUsersRequestText = "SET_USERS";
 const changePageRequestText = "CHANGE_PAGE";
 const setUsersCountRequestText = "SET_COUNT";
+const isLoadingRequestText = "IS_LOADING";
+const toggleIsFollowingProgress = "TOOGLE_IS_FOLLOWING_PROGRESS";
 
 let initialState = {
   usersData: [],
   pageSize: 5,
   totalUsersCount: 0,
   currentPage: 1,
+  isLoading: true,
+  followingInProgress: [],
 };
 
 export default function usersReducer(state = initialState, action = {}) {
@@ -42,6 +46,7 @@ export default function usersReducer(state = initialState, action = {}) {
     case newUsersRequestText:
       return {
         ...state,
+        isLoading: false,
         usersData: [...action.users],
       };
     case changePageRequestText:
@@ -54,28 +59,53 @@ export default function usersReducer(state = initialState, action = {}) {
         ...state,
         totalUsersCount: action.count,
       };
+    case isLoadingRequestText:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case toggleIsFollowingProgress:
+      console.log(state.followingInProgress);
+      return {
+        ...state,
+        followingInProgress: !action.isFetching
+          ? [
+              ...state.followingInProgress.filter(
+                (id) => id != action.fetchingId
+              ),
+            ]
+          : [...state.followingInProgress, action.fetchingId],
+      };
     default:
       return state;
   }
 }
-export const followUserRequest = (id) => ({
+
+export const followUser = (id) => ({
   type: followUserRequestText,
   userId: id,
 });
-export const unFollowUserRequest = (id) => ({
+export const unFollowUser = (id) => ({
   type: unFollowUserRequestText,
   userId: id,
 });
-export const newUsersRequest = (users) => ({
+export const setUsers = (users) => ({
   type: newUsersRequestText,
   users,
 });
-export const changePageRequest = (page) => ({
+export const changePage = (page) => ({
   type: changePageRequestText,
   page,
 });
-
-export const setUsersCountRequest = (count) => ({
+export const setUsersCount = (count) => ({
   type: setUsersCountRequestText,
   count,
+});
+export const changeLoading = () => ({
+  type: isLoadingRequestText,
+});
+export const toggleFollowingProgress = (isFetching, fetchingId) => ({
+  type: toggleIsFollowingProgress,
+  fetchingId,
+  isFetching,
 });

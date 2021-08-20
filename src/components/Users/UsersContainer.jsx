@@ -1,91 +1,79 @@
 import { connect } from "react-redux";
 import {
-  followUserRequest,
-  unFollowUserRequest,
-  newUsersRequest,
-  changePageRequest,
-  setUsersCountRequest,
+  followUser,
+  unFollowUser,
+  setUsers,
+  changePage,
+  setUsersCount,
+  changeLoading,
+  toggleFollowingProgress,
 } from "../../redux/usersReducer";
 import Users from "./Users";
-import * as axios from "axios";
 import React from "react";
-import LinearProgress from "@material-ui/core/CircularProgress";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { getUsers } from "../../api/api";
 
 class UsersContainerAPI extends React.Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-        this.props.setCount(response.data.totalCount);
-      });
+    getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
+      this.props.setUsers(data.items);
+      this.props.setUsersCount(data.totalCount);
+    });
   }
-  showUsers = () => {
-    axios
-      .get(
-        `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`
-      )
-      .then((response) => {
-        this.props.setUsers(response.data.items);
-      });
+  showUsers = (pageNum) => {
+    this.props.changeLoading();
+    getUsers(pageNum, this.props.pageSize).then((data) => {
+      this.props.setUsers(data.items);
+    });
   };
 
   render() {
     return (
       <>
-        <LinearProgress />
-        <Users
-          totalUsersCount={this.props.totalUsersCount}
-          pageSize={this.props.pageSize}
-          currentPage={this.props.currentPage}
-          changePage={this.props.changePage}
-          showUsers={this.showUsers}
-          users={this.props.users}
-          followUser={this.props.followUser}
-          unFollowUser={this.props.unFollowUser}
-        />
+        {this.props.isLoading ? (
+          <CircularProgress />
+        ) : (
+          <Users
+            totalUsersCount={this.props.totalUsersCount}
+            pageSize={this.props.pageSize}
+            currentPage={this.props.currentPage}
+            changePage={this.props.changePage}
+            showUsers={this.showUsers}
+            users={this.props.users}
+            followUser={this.props.followUser}
+            unFollowUser={this.props.unFollowUser}
+            isLoading={this.props.isLoading}
+            followingInProgress={this.props.followingInProgress}
+            toggleFollowingProgress={this.props.toggleFollowingProgress}
+          />
+        )}
       </>
     );
   }
 }
 
 let mapStateToProps = (state) => {
-  console.log(state);
   return {
     users: state.usersData,
     pageSize: state.usersData.pageSize,
     totalUsersCount: state.usersData.totalUsersCount,
     currentPage: state.usersData.currentPage,
-  };
-};
-let mapDispatchToProps = (dispatch) => {
-  return {
-    followUser: (id) => {
-      dispatch(followUserRequest(id));
-    },
-    unFollowUser: (id) => {
-      dispatch(unFollowUserRequest(id));
-    },
-    setUsers: (users) => {
-      dispatch(newUsersRequest(users));
-    },
-    changePage: (page) => {
-      dispatch(changePageRequest(page));
-    },
-    setCount: (count) => {
-      dispatch(setUsersCountRequest(count));
-    },
+    isLoading: state.usersData.isLoading,
+    followingInProgress: state.usersData.followingInProgress,
   };
 };
 
-const UsersContainer = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UsersContainerAPI);
+const UsersContainer = connect(mapStateToProps, {
+  followUser,
+  unFollowUser,
+  setUsers,
+  changePage,
+  setUsersCount,
+  changeLoading,
+  toggleFollowingProgress,
+})(UsersContainerAPI);
 
 export default UsersContainer;

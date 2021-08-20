@@ -1,9 +1,7 @@
-import * as axios from "axios";
 import React from "react";
 import User from "./User/User";
 import Button from "@material-ui/core/Button";
 import classes from "./Users.module.css";
-import CircularProgress from "@material-ui/core/CircularProgress";
 
 function Users(props) {
   let pagesCount =
@@ -23,19 +21,22 @@ function Users(props) {
             }
             onClick={() => {
               props.changePage(element);
-              props.showUsers();
+              props.showUsers(element);
             }}
           >
             {element}
           </span>
         );
       })}
+
       {props.users.usersData.map((element) => (
         <User
           key={element.id}
           user={element}
           followUser={props.followUser}
           unFollowUser={props.unFollowUser}
+          followingInProgress={props.followingInProgress}
+          toggleFollowingProgress={props.toggleFollowingProgress}
         />
       ))}
       <Button onClick={props.showUsers} variant="contained" color="primary">

@@ -1,7 +1,9 @@
+import avatarWithoutPhoto from "../images/avatarWithoutPhoto.png";
+
 const addPostRequestText = "ADD_POST";
 const inputPostRequestText = "INPUT_POST";
 const likePostRequestText = "LIKE_POST";
-
+const setNewUserRequestText = "NEW_USER";
 let initialState = {
   postsData: [
     {
@@ -51,6 +53,7 @@ let initialState = {
   ],
   input: "",
   author: "Martial Anna",
+  user: null,
 };
 
 export default function dialogsReducer(state = initialState, action = {}) {
@@ -97,6 +100,14 @@ export default function dialogsReducer(state = initialState, action = {}) {
           return element;
         }),
       };
+    case setNewUserRequestText:
+      // if (action.user.photos.small == null) {
+      //   action.user.photos.small == avatarWithoutPhoto;
+      // }
+      return {
+        ...state,
+        user: action.user,
+      };
     default:
       return state;
   }
@@ -115,4 +126,8 @@ export const inputPostRequest = (text) => ({
 export const likePostRequest = (id) => ({
   type: likePostRequestText,
   id,
+});
+export const setNewUser = (user) => ({
+  type: setNewUserRequestText,
+  user,
 });

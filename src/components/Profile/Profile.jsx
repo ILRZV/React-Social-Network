@@ -5,9 +5,10 @@ import ProfileHeader from "./ProfileHeader/ProfileHeader";
 import ProfileNavigation from "./ProfileNavigation/ProfileNavigation";
 
 function Profile(props) {
+  console.log(props);
   return (
     <div className={classes.profile_wrapper}>
-      <ProfileHeader />
+      <ProfileHeader userProfile={props.data.userProfile} />
       <div className={classes.profile_content}>
         <ProfileNavigation />
         <MyPostsContainer />
