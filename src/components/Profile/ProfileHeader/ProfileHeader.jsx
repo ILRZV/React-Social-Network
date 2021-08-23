@@ -1,15 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./ProfileHeader.module.css";
 import introImage from "../../../images/Mountaines.jpeg";
-import avatar from "../../../images/Girl.jpg";
 import Button from "@material-ui/core/Button";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import Divider from "@material-ui/core/Divider";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Status from "./Status/Status";
 
 function ProfileHeader(props) {
-  console.log(props);
   return (
     <>
       {props.userProfile == null ? (
@@ -26,6 +25,7 @@ function ProfileHeader(props) {
               <span className={classes.name}>{props.userProfile.fullName}</span>
               <br />
               <span className={classes.mail}>polyester@gmail.com</span>
+              <Status status={props.status} />
             </div>
 
             <div className={classes.buttons}>

@@ -26,3 +26,11 @@ export const postFollowUser = (id) => {
 export const getAuthMe = () => {
   return instance.get(`auth/me`).then((response) => response.data.data);
 };
+
+export const getUserProfile = (id) => {
+  return instance.get(`profile/${id}`).then((response) => response.data);
+};
+
+export const getUserStatus = (id) => {
+  return instance.get(`profile/status/${id}`).then((response) => response.data);
+};

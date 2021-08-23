@@ -1,33 +1,26 @@
 import { connect } from "react-redux";
 import {
-  followUser,
-  unFollowUser,
-  setUsers,
   changePage,
-  setUsersCount,
   changeLoading,
-  toggleFollowingProgress,
+  getUsersThunk,
+  followUserThunk,
+  unfollowUserThunk,
+  changeInput,
 } from "../../redux/usersReducer";
 import Users from "./Users";
 import React from "react";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { getUsers } from "../../api/api";
 
 class UsersContainerAPI extends React.Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
-    getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
-      this.props.setUsers(data.items);
-      this.props.setUsersCount(data.totalCount);
-    });
+    this.props.getUsersThunk(this.props.currentPage, this.props.pageSize);
   }
   showUsers = (pageNum) => {
     this.props.changeLoading();
-    getUsers(pageNum, this.props.pageSize).then((data) => {
-      this.props.setUsers(data.items);
-    });
+    this.props.getUsersThunk(pageNum, this.props.pageSize);
   };
 
   render() {
@@ -43,11 +36,12 @@ class UsersContainerAPI extends React.Component {
             changePage={this.props.changePage}
             showUsers={this.showUsers}
             users={this.props.users}
-            followUser={this.props.followUser}
-            unFollowUser={this.props.unFollowUser}
             isLoading={this.props.isLoading}
             followingInProgress={this.props.followingInProgress}
-            toggleFollowingProgress={this.props.toggleFollowingProgress}
+            followUserThunk={this.props.followUserThunk}
+            unfollowUserThunk={this.props.unfollowUserThunk}
+            changeInput={this.props.changeInput}
+            input={this.props.input}
           />
         )}
       </>
@@ -63,17 +57,17 @@ let mapStateToProps = (state) => {
     currentPage: state.usersData.currentPage,
     isLoading: state.usersData.isLoading,
     followingInProgress: state.usersData.followingInProgress,
+    input: state.usersData.inputText,
   };
 };
 
 const UsersContainer = connect(mapStateToProps, {
-  followUser,
-  unFollowUser,
-  setUsers,
   changePage,
-  setUsersCount,
   changeLoading,
-  toggleFollowingProgress,
+  getUsersThunk,
+  followUserThunk,
+  unfollowUserThunk,
+  changeInput,
 })(UsersContainerAPI);
 
 export default UsersContainer;

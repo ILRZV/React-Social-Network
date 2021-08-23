@@ -39,10 +39,10 @@ export default function dialogsReducer(state = initialState, action = {}) {
   }
 }
 
-export const addMessageRequest = () => ({
+export const addMessage = () => ({
   type: addMessageRequestText,
 });
-export const inputMessageRequest = (text) => ({
+export const inputMessage = (text) => ({
   type: inputMessageRequestText,
   newInput: text,
 });

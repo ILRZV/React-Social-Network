@@ -1,3 +1,5 @@
+import { getAuthMe } from "../api/api";
+
 const setUserDataRequestText = "SET_USER_DATA";
 
 let initialState = {
@@ -10,7 +12,6 @@ let initialState = {
 export default function usersReducer(state = initialState, action = {}) {
   switch (action.type) {
     case setUserDataRequestText:
-      console.log(action);
       return {
         ...state,
         ...action.data,
@@ -25,3 +26,12 @@ export const setUserData = (userId, email, login) => ({
   type: setUserDataRequestText,
   data: { userId, email, login },
 });
+
+export const getAuthMeThunk = () => {
+  return (dispatch) => {
+    getAuthMe().then((data) => {
+      let { email, id, login } = data;
+      dispatch(setUserData(id, email, login));
+    });
+  };
+};

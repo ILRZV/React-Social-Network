@@ -1,9 +1,11 @@
-import avatarWithoutPhoto from "../images/avatarWithoutPhoto.png";
+import { getUserProfile, getUserStatus } from "../api/api";
 
-const addPostRequestText = "ADD_POST";
-const inputPostRequestText = "INPUT_POST";
-const likePostRequestText = "LIKE_POST";
-const setNewUserRequestText = "NEW_USER";
+const ADD_POST = "ADD_POST";
+const INPUT_POST = "INPUT_POST";
+const LIKE_POST = "LIKE_POST";
+const SET_NEW_USER = "NEW_USER";
+const SET_STATUS = "SET_STATUS";
+
 let initialState = {
   postsData: [
     {
@@ -54,11 +56,12 @@ let initialState = {
   input: "",
   author: "Martial Anna",
   user: null,
+  status: "",
 };
 
 export default function dialogsReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case addPostRequestText:
+    case ADD_POST:
       console.log(state.postsData);
       return {
         ...state,
@@ -79,12 +82,12 @@ export default function dialogsReducer(state = initialState, action = {}) {
         ],
         input: "",
       };
-    case inputPostRequestText:
+    case INPUT_POST:
       return {
         ...state,
         input: action.newInput,
       };
-    case likePostRequestText:
+    case LIKE_POST:
       return {
         ...state,
         postsData: state.postsData.map((element) => {
@@ -100,13 +103,15 @@ export default function dialogsReducer(state = initialState, action = {}) {
           return element;
         }),
       };
-    case setNewUserRequestText:
-      // if (action.user.photos.small == null) {
-      //   action.user.photos.small == avatarWithoutPhoto;
-      // }
+    case SET_NEW_USER:
       return {
         ...state,
         user: action.user,
+      };
+    case SET_STATUS:
+      return {
+        ...state,
+        status: action.status,
       };
     default:
       return state;
@@ -115,19 +120,35 @@ export default function dialogsReducer(state = initialState, action = {}) {
 
 export const addPostRequest = (date) => {
   return {
-    type: addPostRequestText,
+    type: ADD_POST,
     date: date,
   };
 };
 export const inputPostRequest = (text) => ({
-  type: inputPostRequestText,
+  type: INPUT_POST,
   newInput: text,
 });
 export const likePostRequest = (id) => ({
-  type: likePostRequestText,
+  type: LIKE_POST,
   id,
 });
 export const setNewUser = (user) => ({
-  type: setNewUserRequestText,
+  type: SET_NEW_USER,
   user,
 });
+export const setStatus = (status) => ({
+  type: SET_STATUS,
+  status,
+});
+
+export const getUserProfileThunk = (id) => (dispatch) => {
+  return getUserProfile(id).then((data) => {
+    dispatch(setNewUser(data));
+  });
+};
+
+export const getStatus = (id) => (dispatch) => {
+  return getUserStatus(id).then((data) => {
+    dispatch(setStatus(data));
+  });
+};

@@ -3,8 +3,6 @@ import classes from "./User.module.css";
 import noPhotoAvatar from "../../../images/avatarWithoutPhoto.png";
 import Button from "@material-ui/core/Button";
 import { NavLink } from "react-router-dom";
-import * as axios from "axios";
-import { deleteFollowUser, postFollowUser } from "../../../api/api";
 
 function User(props) {
   let user = props.user;
@@ -24,13 +22,7 @@ function User(props) {
             variant="outlined"
             color="primary"
             onClick={() => {
-              props.toggleFollowingProgress(true, user.id);
-              deleteFollowUser(user.id).then((data) => {
-                if (data.resultCode == 0) {
-                  props.unFollowUser(user.id);
-                }
-                props.toggleFollowingProgress(false, user.id);
-              });
+              props.unfollowUserThunk(user.id);
             }}
           >
             unfollow
@@ -42,13 +34,7 @@ function User(props) {
             variant="outlined"
             color="primary"
             onClick={() => {
-              props.toggleFollowingProgress(true, user.id);
-              postFollowUser(user.id).then((data) => {
-                if (data.resultCode == 0) {
-                  props.followUser(user.id);
-                }
-                props.toggleFollowingProgress(false, user.id);
-              });
+              props.followUserThunk(user.id);
             }}
           >
             follow
