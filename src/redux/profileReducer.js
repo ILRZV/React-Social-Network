@@ -1,4 +1,4 @@
-import { getUserProfile, getUserStatus } from "../api/api";
+import { Profile } from "../api/api";
 
 const ADD_POST = "ADD_POST";
 const INPUT_POST = "INPUT_POST";
@@ -118,17 +118,17 @@ export default function dialogsReducer(state = initialState, action = {}) {
   }
 }
 
-export const addPostRequest = (date) => {
+export const addPost = (date) => {
   return {
     type: ADD_POST,
     date: date,
   };
 };
-export const inputPostRequest = (text) => ({
+export const inputPost = (text) => ({
   type: INPUT_POST,
   newInput: text,
 });
-export const likePostRequest = (id) => ({
+export const likePost = (id) => ({
   type: LIKE_POST,
   id,
 });
@@ -141,14 +141,22 @@ export const setStatus = (status) => ({
   status,
 });
 
-export const getUserProfileThunk = (id) => (dispatch) => {
-  return getUserProfile(id).then((data) => {
+export const getUserProfile = (id) => (dispatch) => {
+  return Profile.getUserProfile(id).then((data) => {
     dispatch(setNewUser(data));
   });
 };
 
 export const getStatus = (id) => (dispatch) => {
-  return getUserStatus(id).then((data) => {
+  return Profile.getUserStatus(id).then((data) => {
     dispatch(setStatus(data));
+  });
+};
+
+export const updateStatus = (status) => (dispatch) => {
+  return Profile.updateStatus(status).then((response) => {
+    if (response.data.resultCode === 0) {
+      dispatch(setStatus(status));
+    }
   });
 };

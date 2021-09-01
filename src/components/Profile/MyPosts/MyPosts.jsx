@@ -1,8 +1,6 @@
 import React from "react";
 import classes from "./MyPosts.module.css";
 import Post from "./Post/Post";
-import CreateIcon from "@material-ui/icons/Create";
-import Button from "@material-ui/core/Button";
 import InputZoneContainer from "./InputZone/InputZoneContainer";
 
 function MyPosts(props) {
@@ -17,6 +15,7 @@ function MyPosts(props) {
         id={element.id}
         likeCounter={element.likeCounter}
         likePost={props.likePost}
+        userProfile={props.userProfile}
       />
     ))
     .reverse();

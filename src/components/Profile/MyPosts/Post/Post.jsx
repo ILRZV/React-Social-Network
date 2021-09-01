@@ -4,7 +4,8 @@ import avatar from "../../../../images/Girl.jpg";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import ShareIcon from "@material-ui/icons/Share";
-import { useEffect } from "react";
+import unknownUser from "../../../../images/avatarWithoutPhoto.png";
+import { CircularProgress } from "@material-ui/core";
 
 function Post(props) {
   let date = new Date(
@@ -18,36 +19,42 @@ function Post(props) {
     props.likePost(props.id);
   };
   return (
-    <div className={classes.item}>
-      <div className={classes.header}>
-        <img src={avatar} />
-        <div className={classes.info}>
-          <p className={classes.author}>{props.author}</p>
-          <p className={classes.date}>
-            {date.getHours()}:
-            {date.getMinutes() < 10
-              ? "0" + date.getMinutes()
-              : date.getMinutes()}{" "}
-            {date.getFullYear()}-{date.getMonth()}-{date.getDate()}
-          </p>
+    <>
+      {props.userProfile === null ? (
+        <div></div>
+      ) : (
+        <div className={classes.item}>
+          <div className={classes.header}>
+            <img src={props.userProfile.photos.small || unknownUser} />
+            <div className={classes.info}>
+              <p className={classes.author}>{props.author}</p>
+              <p className={classes.date}>
+                {date.getHours()}:
+                {date.getMinutes() < 10
+                  ? "0" + date.getMinutes()
+                  : date.getMinutes()}{" "}
+                {date.getFullYear()}-{date.getMonth()}-{date.getDate()}
+              </p>
+            </div>
+          </div>
+          <p>{props.message}</p>
+          <div className={classes.footer}>
+            <Divider />
+            <p className={classes.likes}>
+              {props.isLiked ? "💙" : "♡"} {props.likeCounter}
+            </p>
+            <div className={classes.control}>
+              <Button color="primary" onClick={() => handleLike()}>
+                Like ♡
+              </Button>
+              <Button color="primary">
+                <ShareIcon />
+              </Button>
+            </div>
+          </div>
         </div>
-      </div>
-      <p>{props.message}</p>
-      <div className={classes.footer}>
-        <Divider />
-        <p className={classes.likes}>
-          {props.isLiked ? "💙" : "♡"} {props.likeCounter}
-        </p>
-        <div className={classes.control}>
-          <Button color="primary" onClick={() => handleLike()}>
-            Like ♡
-          </Button>
-          <Button color="primary">
-            <ShareIcon />
-          </Button>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 

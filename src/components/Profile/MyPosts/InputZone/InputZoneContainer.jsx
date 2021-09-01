@@ -1,9 +1,6 @@
 import InputZone from "./InputZone";
 
-import {
-  addPostRequest,
-  inputPostRequest,
-} from "../../../../redux/profileReducer";
+import { addPost, inputPost } from "../../../../redux/profileReducer";
 
 import { connect } from "react-redux";
 
@@ -16,10 +13,10 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
   return {
     addPost: (date) => {
-      dispatch(addPostRequest(date));
+      dispatch(addPost(date));
     },
     changeInput: (text) => {
-      dispatch(inputPostRequest(text));
+      dispatch(inputPost(text));
     },
   };
 };

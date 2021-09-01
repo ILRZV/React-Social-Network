@@ -1,9 +1,5 @@
 import MyPosts from "./MyPosts";
-import {
-  addPostRequest,
-  inputPostRequest,
-  likePostRequest,
-} from "../../../redux/profileReducer";
+import { addPost, inputPost, likePost } from "../../../redux/profileReducer";
 import { connect } from "react-redux";
 // function MyPostsContainer() {
 //   return (
@@ -32,22 +28,14 @@ let mapStateToProps = (state) => {
   return {
     postsData: state.profileData.postsData,
     author: state.profileData.author,
+    userProfile: state.profileData.user,
   };
 };
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    addPost: () => {
-      dispatch(addPostRequest());
-    },
-    changeInput: (text) => {
-      dispatch(inputPostRequest(text));
-    },
-    likePost: (id) => {
-      dispatch(likePostRequest(id));
-    },
-  };
-};
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
+const MyPostsContainer = connect(mapStateToProps, {
+  addPost,
+  inputPost,
+  likePost,
+})(MyPosts);
 
 export default MyPostsContainer;

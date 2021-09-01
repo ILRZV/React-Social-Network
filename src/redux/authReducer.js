@@ -1,4 +1,4 @@
-import { getAuthMe } from "../api/api";
+import { Auth } from "../api/api";
 
 const setUserDataRequestText = "SET_USER_DATA";
 
@@ -29,7 +29,7 @@ export const setUserData = (userId, email, login) => ({
 
 export const getAuthMeThunk = () => {
   return (dispatch) => {
-    getAuthMe().then((data) => {
+    Auth.getAuthMe().then((data) => {
       let { email, id, login } = data;
       dispatch(setUserData(id, email, login));
     });

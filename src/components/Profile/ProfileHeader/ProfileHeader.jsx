@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import classes from "./ProfileHeader.module.css";
 import introImage from "../../../images/Mountaines.jpeg";
+import unknownUser from "../../../images/avatarWithoutPhoto.png";
 import Button from "@material-ui/core/Button";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
@@ -19,13 +20,13 @@ function ProfileHeader(props) {
           <div className={classes.header_info}>
             <img
               className={classes.avatar}
-              src={props.userProfile.photos.small}
+              src={props.userProfile.photos.small || unknownUser}
             ></img>
             <div className={classes.info}>
               <span className={classes.name}>{props.userProfile.fullName}</span>
               <br />
-              <span className={classes.mail}>polyester@gmail.com</span>
-              <Status status={props.status} />
+              <span className={classes.mail}>test@e mail.com</span>
+              <Status status={props.status} updateStatus={props.updateStatus} />
             </div>
 
             <div className={classes.buttons}>

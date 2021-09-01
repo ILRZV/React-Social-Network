@@ -12,7 +12,7 @@ function InputZone(props) {
 
   let handleAddPost = () => {
     let date = new Date();
-    props.addPost(date);
+    if (newElementRef.current.value.length > 0) props.addPost(date);
     newElementRef.current.value = "";
   };
 
