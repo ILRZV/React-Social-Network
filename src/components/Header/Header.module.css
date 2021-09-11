@@ -1,13 +1,29 @@
 .header {
   grid-area: h;
   background-color: white;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.header img {
+.logo {
   height: 100px;
   background-color: green;
+  position: relative;
+  top: -20px;
 }
 
 .loginBlock {
-  background-color: red;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+}
+
+.name {
+}
+
+.user {
+  height: 40px;
+  margin: 20px;
 }

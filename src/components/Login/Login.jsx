@@ -1,17 +1,17 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 
-function LoginForm() {
+function LoginForm(props) {
   return (
-    <form>
+    <form onSubmit={props.handleSubmit}>
       <div>
-        <Field placeholder="login" component="input" />
+        <Field placeholder="login" name={"login"} component="input" />
       </div>
       <div>
-        <Field placeholder="password" component="input" />
+        <Field placeholder="password" name={"password"} component="input" />
       </div>
       <div>
-        <Field component="input" type="checkbox" />
+        <Field name={"remeberMe"} type="checkbox" component="input" />
         <span>remeber me</span>
       </div>
       <div>
@@ -23,8 +23,11 @@ function LoginForm() {
 
 const LoginReduxForm = reduxForm({ form: "login" })(LoginForm);
 
-function Login() {
-  return <LoginReduxForm />;
+function Login(props) {
+  const onHandleSubmit = (formData) => {
+    console.log(formData);
+  };
+  return <LoginReduxForm onSubmit={onHandleSubmit} />;
 }
 
 export default Login;

@@ -6,6 +6,7 @@ import {
   getStatus,
   updateStatus,
 } from "../../redux/profileReducer";
+import { followUserThunk, unfollowUserThunk } from "../../redux/usersReducer";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 
@@ -37,7 +38,13 @@ let mapStateToProps = (state) => {
 };
 
 let Connected = compose(
-  connect(mapStateToProps, { getUserProfile, getStatus, updateStatus }),
+  connect(mapStateToProps, {
+    getUserProfile,
+    getStatus,
+    updateStatus,
+    followUserThunk,
+    unfollowUserThunk,
+  }),
   withRouter
   // withAuthRedirect
 )(ProfileContainerAPI);

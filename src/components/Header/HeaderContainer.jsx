@@ -1,9 +1,8 @@
-import * as axios from "axios";
 import React from "react";
 import { connect } from "react-redux";
 import Header from "./Header";
 import { setUserData, getAuthMeThunk } from "../../redux/authReducer";
-import { getAuthMe } from "../../api/api";
+import { followUserThunk, unfollowUserThunk } from "../../redux/usersReducer";
 
 class HeaderComponentAPI extends React.Component {
   constructor(props) {
@@ -25,7 +24,10 @@ let mapStateToProps = (state) => {
     isLogin: state.authData.isLogin,
   };
 };
-let HeaderComponent = connect(mapStateToProps, { setUserData, getAuthMeThunk })(
-  HeaderComponentAPI
-);
+let HeaderComponent = connect(mapStateToProps, {
+  setUserData,
+  getAuthMeThunk,
+  followUserThunk,
+  unfollowUserThunk,
+})(HeaderComponentAPI);
 export default HeaderComponent;

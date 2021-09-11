@@ -1,5 +1,5 @@
 import InputZone from "./InputZone";
-
+import { Field, reduxForm } from "redux-form";
 import { addPost, inputPost } from "../../../../redux/profileReducer";
 
 import { connect } from "react-redux";
@@ -20,6 +20,12 @@ let mapDispatchToProps = (dispatch) => {
     },
   };
 };
+
+let formRedux = reduxForm({ form: "newPost" })(FormInput);
+function FormInput() {
+  return <InputZone />;
+}
+
 const InputZoneContainer = connect(
   mapStateToProps,
   mapDispatchToProps
